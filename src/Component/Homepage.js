@@ -76,3 +76,4 @@ const buttonStyle = {
 };
 
 export default MainPage;
+
