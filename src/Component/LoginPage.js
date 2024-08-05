@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Footer from './Footer'; // 푸터 컴포넌트 임포트
+import Footer from './Footer'; 
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -9,9 +9,7 @@ const LoginPage = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // 로그인 처리 로직을 여기에 추가
-
-    // 로그인 후 홈 페이지로 이동 (테스트용)
+   
     navigate('/');
   };
 
@@ -50,12 +48,12 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      <Footer /> {/* 푸터를 페이지 하단에 추가 */}
+      <Footer />
     </div>
   );
 };
 
-// 스타일 객체 정의
+// 스타일 
 const pageStyle = {
   display: 'flex',
   justifyContent: 'center',

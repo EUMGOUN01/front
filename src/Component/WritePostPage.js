@@ -10,19 +10,15 @@ const WritePostPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // For demonstration purposes, we'll just log the post data.
-    // In a real application, you would send this data to a server or update local state.
     const newPost = {
       title,
       category,
       content,
-      author: 'user', // Replace with actual author
+      author: 'user', 
       date: new Date().toISOString().split('T')[0],
       views: 0,
     };
     console.log('New Post:', newPost);
-
-    // Navigate back to the board or another page
     navigate('/board');
   };
 

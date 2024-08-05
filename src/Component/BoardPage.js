@@ -15,19 +15,17 @@ const BoardPage = () => {
     { id: 8, category: '기타', title: '여덟번째 게시물', author: 'user2', date: '2024-08-08', views: 12 },
     { id: 9, category: '공지', title: '아홉번째 게시물', author: 'admin', date: '2024-08-09', views: 30 },
     { id: 10, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    // Add more sample data as needed
+    
   ]);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
 
-  // Filter posts based on search query
   const filteredPosts = boardData.filter(post =>
     post.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Calculate pagination
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
@@ -39,10 +37,11 @@ const BoardPage = () => {
   };
 
   const handleSearch = () => {
-    setCurrentPage(1); // Reset to the first page on new search
+    setCurrentPage(1); 
   };
 
   return (
+    
     <BoardContainer>
       <BoardHeader>
         <h2>자유 게시판</h2>

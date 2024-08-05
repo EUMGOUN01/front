@@ -5,14 +5,14 @@ import LoginPage from './Component/LoginPage';
 import SignupPage from './Component/SignupPage';
 import BoardPage from './Component/BoardPage';
 import WritePostPage from './Component/WritePostPage'; 
-import Homepage from './Component/Homepage'; // 새로운 파일 이름으로 임포트
+import Homepage from './Component/Homepage'; 
 
 function App() {
   return (
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Homepage />} /> {/* 새로운 컴포넌트를 기본 경로로 설정 */}
+        <Route path="/" element={<Homepage />} /> 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/board" element={<BoardPage />} />

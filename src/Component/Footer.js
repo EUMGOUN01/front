@@ -11,7 +11,7 @@ const Footer = () => {
   );
 };
 
-// 스타일 객체 정의
+// 스타일 
 const footerStyle = {
   backgroundColor: '#004d40',
   color: '#ffffff',

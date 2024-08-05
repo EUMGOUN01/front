@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-// 이미지 배열
+// 이미지 
 const images = [
   `${process.env.PUBLIC_URL}/Forest.png`,
   `${process.env.PUBLIC_URL}/Forest.png`,
@@ -62,6 +62,7 @@ const sliderContainerStyle = {
   maxWidth: '1200px',
   margin: '0 auto',
   position: 'relative',
+  marginTop: '0', 
 };
 
 const sliderWrapperStyle = {
