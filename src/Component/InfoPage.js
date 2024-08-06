@@ -11,6 +11,8 @@ const InfoPage = () => {
       const apiKey = process.env.REACT_APP_API_KEY;
       const url = `/service/garden/gardenDtl?key=${apiKey}`;
 
+      console.log('Fetching data from URL:', url);
+
       try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -29,6 +31,7 @@ const InfoPage = () => {
         const resultData = result.response.header;
         setData(resultData);
       } catch (error) {
+        console.error('Fetch error:', error);
         setError(error);
       } finally {
         setLoading(false);

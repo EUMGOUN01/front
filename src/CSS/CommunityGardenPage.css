@@ -49,3 +49,26 @@
 .info-icon {
   font-size: 1.5rem; /* 아이콘 크기 조정 */
 }
+
+/* 텍스트가 서서히 나타나는 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.text-section {
+  animation: fadeIn 3s ease-in-out;
+}
+
+.text-section h1 {
+  margin: 0;
+}
+
+.text-section p {
+  margin: 0;
+}
+
