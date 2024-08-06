@@ -2,7 +2,7 @@
 .container {
   padding: 20px;
   max-width: 1000px;
-  margin: 30px auto;
+  margin: 30px auto; /* 중앙 정렬을 위한 자동 여백 */
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -21,46 +21,28 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 100%;
 }
 
 /* 입력 필드 및 선택 박스 공통 스타일 */
-.input, .select, .textarea, .file-input {
+.input, .textarea, .file-input {
   padding: 14px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 6px;
   box-sizing: border-box;
-  width: 100%;
-}
-
-/* 카테고리 레이블 스타일 */
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.label {
-  display: flex;
-  flex-direction: column;
-}
-
-/* 드롭다운 박스 왼쪽으로 이동 */
-.select {
-  margin-left: -10px; /* 드롭다운 박스를 왼쪽으로 이동 */
-  width: 200px; /* 드롭다운 박스의 너비를 필요에 따라 조절 */
+  width: 800px; /* 부모 요소의 너비에 맞게 조정 */
 }
 
 /* 제목 입력 필드 스타일 */
 .input {
-  width: 800px;
+  max-width: 800px; /* 최대 너비 설정 */
 }
 
 /* 텍스트 영역 스타일 */
 .textarea {
   height: 250px;
   resize: vertical;
-  width: 800px;
+  max-width: 800px; /* 최대 너비 설정 */
 }
 
 /* 파일 입력 스타일 */
@@ -87,7 +69,7 @@
   transform: scale(1.05);
 }
 
-/* 추가 스타일: 폼 요소의 포커스 스타일 */
+/* 폼 요소의 포커스 스타일 */
 .input:focus, .select:focus, .textarea:focus {
   border-color: #004d40;
   outline: none;

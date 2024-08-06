@@ -6,7 +6,8 @@ import SignupPage from './Component/SignupPage';
 import BoardPage from './Component/BoardPage';
 import WritePostPage from './Component/WritePostPage';
 import Homepage from './Component/Homepage';
-import InfoPage from './Component/InfoPage'; 
+import InfoPage from './Component/InfoPage';
+import CommunityGardenPage from './Component/CommunityGardenPage'; 
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/board" element={<BoardPage />} />
         <Route path="/write" element={<WritePostPage />} />
         <Route path="/info" element={<InfoPage />} />
+        <Route path="/community-garden" element={<CommunityGardenPage />} /> {/* Add this route */}
       </Routes>
     </Router>
   );
