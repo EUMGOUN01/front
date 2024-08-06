@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import '../CSS/BoardPage.css';
 
 const BoardPage = () => {
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ const BoardPage = () => {
     { id: 8, category: '기타', title: '여덟번째 게시물', author: 'user2', date: '2024-08-08', views: 12 },
     { id: 9, category: '공지', title: '아홉번째 게시물', author: 'admin', date: '2024-08-09', views: 30 },
     { id: 10, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    
   ]);
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -41,21 +40,21 @@ const BoardPage = () => {
   };
 
   return (
-    
-    <BoardContainer>
-      <BoardHeader>
+    <div className="board-container">
+      <div className="board-header">
         <h2>자유 게시판</h2>
-        <SearchContainer>
-          <SearchInput
+        <div className="search-container">
+          <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="검색어를 입력하세요"
+            className="search-input"
           />
-          <SearchButton onClick={handleSearch}>조회</SearchButton>
-        </SearchContainer>
-      </BoardHeader>
-      <Table>
+          <button onClick={handleSearch} className="search-button">조회</button>
+        </div>
+      </div>
+      <table className="table">
         <thead>
           <tr>
             <th>번호</th>
@@ -78,133 +77,35 @@ const BoardPage = () => {
             </tr>
           ))}
         </tbody>
-      </Table>
-      <Pagination>
-        <PageButton
+      </table>
+      <div className="pagination">
+        <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
+          className="page-button"
         >
           이전
-        </PageButton>
+        </button>
         {[...Array(totalPages).keys()].map(number => (
-          <PageNumber
+          <span
             key={number + 1}
             onClick={() => handlePageChange(number + 1)}
-            active={currentPage === number + 1}
+            className={`page-number ${currentPage === number + 1 ? 'active' : ''}`}
           >
             {number + 1}
-          </PageNumber>
+          </span>
         ))}
-        <PageButton
+        <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
+          className="page-button"
         >
           다음
-        </PageButton>
-      </Pagination>
-      <WriteButton onClick={() => navigate('/write')}>글쓰기</WriteButton>
-    </BoardContainer>
+        </button>
+      </div>
+      <button onClick={() => navigate('/write')} className="write-button">글쓰기</button>
+    </div>
   );
 };
-
-const BoardContainer = styled.div`
-  padding: 20px;
-  max-width: 800px;
-  margin: 40px auto; /* 중앙에 배치하기 위한 여백 추가 */
-  position: relative;
-`;
-
-const BoardHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
-const SearchContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const SearchInput = styled.input`
-  padding: 5px;
-  font-size: 14px;
-  margin-right: 5px;
-`;
-
-const SearchButton = styled.button`
-  padding: 5px 10px;
-  font-size: 14px;
-  background-color: #004d40;
-  color: white;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #00332a;
-  }
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-
-  th {
-    background-color: #f2f2f2;
-  }
-`;
-
-const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-`;
-
-const PageNumber = styled.span`
-  margin: 0 5px;
-  cursor: pointer;
-  ${({ active }) => active && `
-    font-weight: bold;
-    text-decoration: underline;
-  `}
-`;
-
-const PageButton = styled.button`
-  margin: 0 5px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #004d40;
-  font-size: 14px;
-
-  &:disabled {
-    color: #bbb;
-    cursor: not-allowed;
-  }
-`;
-
-const WriteButton = styled.button`
-  padding: 5px 10px;
-  font-size: 14px;
-  background-color: #004d40;
-  color: white;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  bottom: 20px;
-  right: 0;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #00332a;
-  }
-`;
 
 export default BoardPage;

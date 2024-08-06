@@ -1,0 +1,100 @@
+.board-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 40px auto; /* 중앙에 배치하기 위한 여백 추가 */
+    position: relative;
+  }
+  
+  .board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-input {
+    padding: 5px;
+    font-size: 14px;
+    margin-right: 5px;
+  }
+  
+  .search-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #004d40;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .search-button:hover {
+    background-color: #00332a;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .page-number {
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .page-number.active {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  
+  .page-button {
+    margin: 0 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #004d40;
+    font-size: 14px;
+  }
+  
+  .page-button:disabled {
+    color: #bbb;
+    cursor: not-allowed;
+  }
+  
+  .write-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #004d40;
+    color: white;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    border-radius: 5px;
+  }
+  
+  .write-button:hover {
+    background-color: #00332a;
+  }
