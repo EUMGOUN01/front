@@ -68,14 +68,13 @@ const SignupPage = () => {
             <button type="submit" className="button">회원가입</button>
           </form>
           <div className="link-container">
-            <a href="/login" className="link">로그인</a>
+            <a href="/login" className="button login-button">로그인</a>
           </div>
         </div>
       </div>
-      <Footer /> 
+      <Footer />
     </div>
   );
 };
 
 export default SignupPage;
-

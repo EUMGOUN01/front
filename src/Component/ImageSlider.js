@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 // 이미지 
 const images = [
-  `${process.env.PUBLIC_URL}/Forest.png`,
-  `${process.env.PUBLIC_URL}/Forest.png`,
-  `${process.env.PUBLIC_URL}/Forest.png`,
-  `${process.env.PUBLIC_URL}/Forest.png`,
-  `${process.env.PUBLIC_URL}/Forest.png`,
+  `${process.env.PUBLIC_URL}/Forests.png`,
+  `${process.env.PUBLIC_URL}/Forests.png`,
+  `${process.env.PUBLIC_URL}/Forests.png`,
+  `${process.env.PUBLIC_URL}/Forests.png`,
+  `${process.env.PUBLIC_URL}/Forests.png`,
 ];
 
 const ImageSlider = () => {
@@ -45,7 +45,7 @@ const ImageSlider = () => {
             onClick={() => goToSlide(index)}
             style={{
               ...indicatorStyle,
-              backgroundColor: currentIndex === index ? '#000' : '#bbb',
+              backgroundColor: currentIndex === index ? '#fff' : '#ddd',
             }}
           />
         ))}
@@ -79,8 +79,10 @@ const imageContainerStyle = {
 };
 
 const imageStyle = {
-  width: '100%',
-  height: 'auto',
+  width: '100%',       
+  height: '100%',      
+  objectFit: 'cover',  
+  cursor: 'pointer',   
 };
 
 const indicatorContainerStyle = {
@@ -96,7 +98,7 @@ const indicatorStyle = {
   width: '10px',
   height: '10px',
   borderRadius: '50%',
-  backgroundColor: '#bbb',
+  backgroundColor: '#ddd', 
   cursor: 'pointer',
 };
 

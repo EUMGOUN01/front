@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FiMenu } from 'react-icons/fi';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const Header = () => {
         <NavItem href="/plant-sharing">식물 나눔</NavItem>
         <NavItem href="/board">자유게시판</NavItem>
         <NavItem href="/community-garden">공용 텃밭</NavItem>
+        <FiMenu style={menuIconStyle} />
       </nav>
     </header>
   );
@@ -48,7 +50,8 @@ const headerStyle = {
   padding: '20px',
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
   textAlign: 'center',
-  position: 'relative',
+  // 헤더를 페이지 스크롤과 함께 움직이도록 설정 (기본값)
+  position: 'static',
 };
 
 const logoStyle = {
@@ -76,7 +79,9 @@ const topNavItemStyle = {
 const navStyle = {
   display: 'flex',
   justifyContent: 'center',
+  alignItems: 'center',
   margin: '20px 0',
+  position: 'relative',
 };
 
 const navItemStyle = {
@@ -86,5 +91,12 @@ const navItemStyle = {
   cursor: 'pointer',
 };
 
-export default Header;
+const menuIconStyle = {
+  fontSize: '24px',
+  color: '#004d40',
+  cursor: 'pointer',
+  position: 'absolute',
+  right: '10px',
+};
 
+export default Header;

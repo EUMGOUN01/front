@@ -1,44 +1,116 @@
+/* 기본적인 컨테이너 스타일 */
 .container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 30px auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 페이지 제목 스타일 */
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* 폼 스타일 */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 100%;
+}
+
+/* 입력 필드 및 선택 박스 공통 스타일 */
+.input, .select, .textarea, .file-input {
+  padding: 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* 카테고리 레이블 스타일 */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 드롭다운 박스 왼쪽으로 이동 */
+.select {
+  margin-left: -10px; /* 드롭다운 박스를 왼쪽으로 이동 */
+  width: 200px; /* 드롭다운 박스의 너비를 필요에 따라 조절 */
+}
+
+/* 제목 입력 필드 스타일 */
+.input {
+  width: 800px;
+}
+
+/* 텍스트 영역 스타일 */
+.textarea {
+  height: 250px;
+  resize: vertical;
+  width: 800px;
+}
+
+/* 파일 입력 스타일 */
+.file-input {
+  padding: 0;
+  font-size: 16px;
+}
+
+/* 버튼 스타일 */
+.button {
+  padding: 12px 24px;
+  background-color: #004d40;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background-color: #00332a;
+  transform: scale(1.05);
+}
+
+/* 추가 스타일: 폼 요소의 포커스 스타일 */
+.input:focus, .select:focus, .textarea:focus {
+  border-color: #004d40;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 77, 64, 0.2);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+    margin: 20px auto;
   }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+
+  .page-title {
+    font-size: 20px;
   }
-  
-  .label {
+
+  .input, .select, .textarea, .file-input {
     font-size: 14px;
   }
-  
-  .input {
-    padding: 8px;
-    font-size: 14px;
-  }
-  
-  .select {
-    padding: 8px;
-    font-size: 14px;
-  }
-  
-  .textarea {
-    padding: 8px;
-    font-size: 14px;
-    height: 150px;
-  }
-  
+
   .button {
-    padding: 10px;
-    background-color: #004d40;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 14px;
   }
-  
-  .button:hover {
-    background-color: #00332a;
-  }
+}

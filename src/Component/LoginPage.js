@@ -42,10 +42,8 @@ const LoginPage = () => {
               />
             </div>
             <button type="submit" className="button">로그인</button>
+            <a href="/signup" className="button">회원가입</a>
           </form>
-          <div className="link-container">
-            <a href="/signup" className="link">회원가입</a>
-          </div>
         </div>
       </div>
       <Footer />
