@@ -11,7 +11,7 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
+  max-width: 300px; /* 최대 너비를 300px로 설정 */
   width: 100%;
 }
 
@@ -30,7 +30,7 @@
 
 .input-group {
   margin-bottom: 15px;
-  width: 100%;
+  width: 100%; /* 부모 컨테이너의 너비를 기준으로 설정 */
 }
 
 .label {
@@ -41,11 +41,13 @@
 }
 
 .input {
-  width: 100%;
+  width: 100%; /* 입력칸이 입력 그룹의 전체 너비를 차지하도록 설정 */
+  max-width: 350px; /* 입력칸의 최대 너비를 250px로 설정 */
   padding: 8px;
   font-size: 14px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  box-sizing: border-box; /* padding과 border를 포함한 너비 계산 */
 }
 
 .button {
