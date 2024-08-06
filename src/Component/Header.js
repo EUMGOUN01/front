@@ -22,7 +22,7 @@ const Header = () => {
         </span>
       </div>
       <nav style={navStyle}>
-        <NavItem href="/info">정보제공</NavItem>
+        <NavItem href="/info">식물 사전</NavItem>
         <NavItem href="/plant-sharing">식물 나눔</NavItem>
         <NavItem href="/board">자유게시판</NavItem>
         <NavItem href="/community-garden">공용 텃밭</NavItem>

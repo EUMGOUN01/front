@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/BoardPage.css';
 import Footer from './Footer';
@@ -16,35 +16,60 @@ const BoardPage = () => {
     { id: 8, category: '기타', title: '여덟번째 게시물', author: 'user2', date: '2024-08-08', views: 12 },
     { id: 9, category: '공지', title: '아홉번째 게시물', author: 'admin', date: '2024-08-09', views: 30 },
     { id: 10, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 11, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 12, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 13, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 14, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 15, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 16, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 17, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 18, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 19, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 20, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 21, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 22, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 23, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 24, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 25, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 26, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 27, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 28, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
   ]);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5;
+  const postsPerPage = 15;
 
-  const filteredPosts = boardData.filter(post =>
+  const filteredPosts = useMemo(() => boardData.filter(post =>
     post.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  ), [boardData, searchQuery]);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = useMemo(() => filteredPosts.slice(indexOfFirstPost, indexOfLastPost), [filteredPosts, indexOfFirstPost, indexOfLastPost]);
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
   const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
   };
 
   const handleSearch = () => {
     setCurrentPage(1);
   };
 
+
+  React.useEffect(() => {
+    document.title = "자유 게시판"; 
+  }, []);
+
   return (
     <>
       <div className="board-container">
         <div className="board-header">
-          <h2>자유 게시판</h2>
+          <h1>자유 게시판</h1> 
           <div className="search-container">
             <input
               type="text"
@@ -53,7 +78,10 @@ const BoardPage = () => {
               placeholder="검색어를 입력하세요"
               className="search-input"
             />
-            <button onClick={handleSearch} className="search-button">조회</button>
+            <div className = "button-container">
+            <button onClick={handleSearch} className="search-button">조회</button> 
+            <button onClick={() => navigate('/write')} className="write-button">글쓰기</button>
+          </div>
           </div>
         </div>
         <table className="table">
@@ -68,16 +96,22 @@ const BoardPage = () => {
             </tr>
           </thead>
           <tbody>
-            {currentPosts.map((post, index) => (
-              <tr key={post.id}>
-                <td>{indexOfFirstPost + index + 1}</td>
-                <td>{post.category}</td>
-                <td>{post.title}</td>
-                <td>{post.author}</td>
-                <td>{post.date}</td>
-                <td>{post.views}</td>
+            {currentPosts.length > 0 ? (
+              currentPosts.map((post, index) => (
+                <tr key={post.id}>
+                  <td>{indexOfFirstPost + index + 1}</td>
+                  <td>{post.category}</td>
+                  <td>{post.title}</td>
+                  <td>{post.author}</td>
+                  <td>{post.date}</td>
+                  <td>{post.views}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6">No posts available</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
         <div className="pagination-container">
@@ -86,6 +120,7 @@ const BoardPage = () => {
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className="page-button"
+              aria-label="Previous Page"
             >
               이전
             </button>
@@ -102,11 +137,12 @@ const BoardPage = () => {
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               className="page-button"
+              aria-label="Next Page"
             >
               다음
             </button>
           </div>
-          <button onClick={() => navigate('/write')} className="write-button">글쓰기</button>
+       
         </div>
       </div>
       <Footer />

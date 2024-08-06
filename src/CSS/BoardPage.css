@@ -1,9 +1,9 @@
 .board-container {
   padding: 20px;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 40px auto;
   position: relative;
-  min-height: calc(100vh - 60px); /* Adjust according to Footer height */
+  min-height: calc(100vh - 60px); 
 }
 
 .board-header {
@@ -15,25 +15,35 @@
 
 .search-container {
   display: flex;
-  align-items: center;
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 10px; /* 요소 사이의 간격 */
 }
 
 .search-input {
   padding: 5px;
   font-size: 14px;
-  margin-right: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  flex-grow: 1; /* 입력창이 가능한 공간을 차지하도록 함 */
+  box-sizing: border-box; /* 패딩과 테두리가 요소의 전체 너비에 포함되도록 함 */
+  height: 35px; /* 버튼과 같은 높이 */
 }
 
-.search-button {
+.search-button, .write-button {
   padding: 5px 10px;
   font-size: 14px;
   background-color: #004d40;
   color: white;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex; /* 버튼 내 텍스트 및 아이콘 수직 중앙 정렬 */
+  align-items: center;
+  height: 35px; /* 버튼 높이 설정 */
 }
 
-.search-button:hover {
+.search-button:hover, .write-button:hover {
   background-color: #00332a;
 }
 
@@ -44,7 +54,10 @@
 }
 
 .table th, .table td {
-  border: 1px solid #ddd;
+  border-left: none; /* Remove vertical borders */
+  border-right: none; /* Optional: if you also want to remove right borders */
+  border-top: 1px solid #ddd; /* Add horizontal borders if needed */
+  border-bottom: 1px solid #ddd;
   padding: 8px;
   text-align: center;
 }
@@ -89,21 +102,6 @@
   cursor: not-allowed;
 }
 
-.write-button {
-  padding: 5px 10px;
-  font-size: 14px;
-  background-color: #004d40;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-left: 10px;
-}
-
-.write-button:hover {
-  background-color: #00332a;
-}
-
 /* Footer 스타일 */
 .footer {
   background-color: #f1f1f1;
@@ -112,4 +110,15 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+.board-header h1 {
+  font-size: 2rem; /* Adjust the size as needed */
+  font-weight: bold;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* 버튼 사이의 여백 */
 }

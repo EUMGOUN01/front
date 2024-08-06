@@ -1,10 +1,11 @@
 .container {
   display: flex;
   flex-direction: row; /* 텍스트와 지도를 나란히 배치 */
-  align-items: flex-start; /* 상단 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
   padding: 20px;
   gap: 20px; /* 요소 사이 간격 */
   position: relative; /* 위치 조정에 필요한 상대 위치 설정 */
+  justify-content: center; /* 수평 중앙 정렬 */
 }
 
 .text-section {
@@ -28,7 +29,11 @@
 .map-section {
   flex: 2;
   width: 100%; /* 지도 너비 100%로 설정 */
+  max-width: 800px; /* 최대 너비 설정 */
   height: 600px; /* 지도 높이 설정 */
+  display: flex; /* 플렉스 컨테이너 설정 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
 }
 
 .more-info {
@@ -71,4 +76,3 @@
 .text-section p {
   margin: 0;
 }
-
