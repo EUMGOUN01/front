@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import '../CSS/ImageSlider.css'; // CSS 파일 import
 
-// 이미지 
 const images = [
-  `${process.env.PUBLIC_URL}/Forests.png`,
-  `${process.env.PUBLIC_URL}/Forests.png`,
-  `${process.env.PUBLIC_URL}/Forests.png`,
-  `${process.env.PUBLIC_URL}/Forests.png`,
-  `${process.env.PUBLIC_URL}/Forests.png`,
+  `${process.env.PUBLIC_URL}/pots.png`,
+  `${process.env.PUBLIC_URL}/pots.png`,
+  `${process.env.PUBLIC_URL}/pots.png`,
+  `${process.env.PUBLIC_URL}/pots.png`,
+  `${process.env.PUBLIC_URL}/pots.png`,
 ];
 
 const ImageSlider = () => {
@@ -19,32 +19,38 @@ const ImageSlider = () => {
   };
 
   return (
-    <div style={sliderContainerStyle}>
-      <div style={sliderWrapperStyle}>
+    <div className="slider-container">
+      <div className="slider-wrapper">
         <div
+          className="image-container"
           style={{
-            ...imageContainerStyle,
             transform: `translateX(-${currentIndex * 100}%)`,
             transition,
           }}
         >
           {images.map((src, index) => (
-            <img
-              key={index}
-              src={src}
-              alt={`Slide ${index + 1}`}
-              style={imageStyle}
-            />
+            <div key={index} className="image-wrapper">
+              <img
+                src={src}
+                alt={`Slide ${index + 1}`}
+                className="image-style"
+              />
+              {index === 0 && (
+                <div className="text-overlay show">
+                  나의<br/>반려식물을<br/>소개해주세요.
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </div>
-      <div style={indicatorContainerStyle}>
+      <div className="indicator-container">
         {images.map((_, index) => (
           <div
             key={index}
             onClick={() => goToSlide(index)}
+            className="indicator"
             style={{
-              ...indicatorStyle,
               backgroundColor: currentIndex === index ? '#fff' : '#ddd',
             }}
           />
@@ -52,54 +58,6 @@ const ImageSlider = () => {
       </div>
     </div>
   );
-};
-
-const sliderContainerStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '100%',
-  maxWidth: '1200px',
-  margin: '0 auto',
-  position: 'relative',
-  marginTop: '0', 
-};
-
-const sliderWrapperStyle = {
-  overflow: 'hidden',
-  width: '100%',
-  maxWidth: '1000px',
-  position: 'relative',
-};
-
-const imageContainerStyle = {
-  display: 'flex',
-  transition: 'transform 0.5s ease-in-out',
-  width: '100%',
-};
-
-const imageStyle = {
-  width: '100%',       
-  height: '100%',      
-  objectFit: 'cover',  
-  cursor: 'pointer',   
-};
-
-const indicatorContainerStyle = {
-  position: 'absolute',
-  bottom: '10px',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  display: 'flex',
-  gap: '5px',
-};
-
-const indicatorStyle = {
-  width: '10px',
-  height: '10px',
-  borderRadius: '50%',
-  backgroundColor: '#ddd', 
-  cursor: 'pointer',
 };
 
 export default ImageSlider;

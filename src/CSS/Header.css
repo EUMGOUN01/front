@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
 /* Header 스타일 */
-header {
-  background: #e0f2f1;
+.header {
+  background: #B3C3A8;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -13,7 +13,7 @@ header {
   font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
-h1 {
+.header h1 {
   font-size: 36px;
   color: #004d40;
   cursor: pointer;
@@ -21,7 +21,7 @@ h1 {
   font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
-.top-nav {
+.header .top-nav {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -30,14 +30,14 @@ h1 {
   font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
-.top-nav-item {
-  font-size: 14px;
+.header .top-nav-item {
+  font-size: 16px;
   color: #2c6b6f;
   cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
-nav {
+.header nav {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,19 +46,42 @@ nav {
   font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
-.nav-item {
+.header .nav-item {
   margin: 0 25px;
-  font-size: 14px;
+  font-size: 18px;
   color: #2c6b6f;
   cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
+  display: inline-block; /* 필요에 따라 블록 요소로 변경 */
+  vertical-align: middle; /* 수직 정렬 조정 */
+  margin-top: 10px; /* 상단 여백 추가 */
 }
 
-.menu-icon {
+.header .menu-icon {
   font-size: 24px;
   color: #004d40;
   cursor: pointer;
   position: absolute;
   right: 10px;
-  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
+  margin-top: 10px; /* 상단 여백 추가 */
+}
+
+/* 폼 박스 스타일 */
+.header input[type="text"],
+.header input[type="password"],
+.header input[type="email"],
+.header select,
+.header textarea {
+  height: 30px; /* 원하는 높이로 설정 */
+  padding: 5px 10px; /* 패딩을 조절하여 높이 조정 */
+  font-size: 16px; /* 폰트 크기 조정 */
+  border: 1px solid #ccc; /* 테두리 스타일 추가 */
+  border-radius: 4px; /* 모서리 둥글게 만들기 */
+  box-sizing: border-box; /* 패딩과 테두리를 포함하여 높이 계산 */
+  margin: 5px 0; /* 상하 마진 추가 */
+}
+
+/* textarea의 경우 높이를 따로 설정 */
+.header textarea {
+  height: 30px; /* 원하는 높이로 설정 */
 }

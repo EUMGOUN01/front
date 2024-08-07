@@ -14,26 +14,26 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-      <div className="main-content">
+      <div className="homepage-main-content">
         <ImageSlider />
-        <div className="button-container">
+        <div className="homepage-button-container">
           <div
-            className="button yellow"
+            className="homepage-button yellow"
             onClick={() => handleNavigation('/info')}
           >
-            정보 제공
+            식물정보
           </div>
           <div
-            className="button green"
+            className="homepage-button green"
             onClick={() => handleNavigation('/sharing')}
           >
             식물 나눔
           </div>
           <div
-            className="button blue"
+            className="homepage-button blue"
             onClick={() => handleNavigation('/board')}
           >
-            자유 게시판
+            커뮤니티
           </div>
         </div>
       </div>
