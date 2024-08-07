@@ -11,8 +11,8 @@
 
 .board-header {
   display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  align-items: flex-start; /* 제목을 상단에 맞추기 */
+  margin-bottom: 20px; /* 제목과 검색창 사이의 간격 조정 */
   gap: 20px; /* 제목과 검색창 사이의 간격 */
   font-size: 36px;
   font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
@@ -22,9 +22,11 @@
   display: flex;
   align-items: center; /* 수직 중앙 정렬 */
   gap: 10px; /* 검색창과 버튼 사이의 간격 */
+  margin-top: 20px; /* 검색창과 버튼을 게시판 글과 더 가까이 배치 */
   margin-left: auto; /* 오른쪽으로 밀어 붙이기 */
   font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
+
 
 .board-search-wrapper {
   display: flex;
@@ -62,7 +64,7 @@
 .board-search-button, .board-write-button {
   padding: 5px 10px;
   font-size: 14px;
-  background-color: #0F2C22;
+  background-color: #0F3830;
   color: white;
   border: none;
   cursor: pointer;
