@@ -43,7 +43,7 @@ const LoginPage = () => {
           <a href="/signup" className="signup-button">회원가입</a>
         </form>
         <div className="login-link-container">
-          <a href="/forgot-password" className="login-link">비밀번호를 잊으셨나요?</a>
+         
         </div>
       </div>
      

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
-
 .board-container {
   padding: 20px;
   max-width: 1200px;
@@ -63,7 +62,7 @@
 .board-search-button, .board-write-button {
   padding: 5px 10px;
   font-size: 14px;
-  background-color: #004d40;
+  background-color: #0F2C22;
   color: white;
   border: none;
   cursor: pointer;
@@ -80,7 +79,7 @@
 .board-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-bottom: 40px; /* 테이블과 페이지네이션 사이의 공간 추가 */
   font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
@@ -95,7 +94,8 @@
 }
 
 .board-table th {
-  background-color: #f2f2f2;
+  background-color: transparent; /* 배경색 제거 */
+  border-top: 2px solid black; /* 상단 경계선만 검은색으로 설정 */
   font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
@@ -103,7 +103,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 40px; /* 페이지네이션을 테이블 아래로 이동 */
   font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
@@ -130,8 +130,8 @@
   cursor: pointer;
   background: none;
   border: none;
-  color: #004d40;
-  font-size: 14px;
+  color: #0F2C22;
+  font-size: 16px;
   font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
