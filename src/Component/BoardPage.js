@@ -60,7 +60,6 @@ const BoardPage = () => {
     setCurrentPage(1);
   };
 
-
   React.useEffect(() => {
     document.title = "자유 게시판"; 
   }, []);
@@ -69,22 +68,22 @@ const BoardPage = () => {
     <>
       <div className="board-container">
         <div className="board-header">
-          <h1>자유 게시판</h1> 
-          <div className="search-container">
+          <h1>자유 게시판</h1>
+          <div className="board-search-container">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="검색어를 입력하세요"
-              className="search-input"
+              className="board-search-input"
             />
-            <div className = "button-container">
-            <button onClick={handleSearch} className="search-button">조회</button> 
-            <button onClick={() => navigate('/write')} className="write-button">글쓰기</button>
-          </div>
+            <div className="board-button-container">
+              <button onClick={handleSearch} className="board-search-button">조회</button>
+              <button onClick={() => navigate('/write')} className="board-write-button">글쓰기</button>
+            </div>
           </div>
         </div>
-        <table className="table">
+        <table className="board-table">
           <thead>
             <tr>
               <th>번호</th>
@@ -114,12 +113,12 @@ const BoardPage = () => {
             )}
           </tbody>
         </table>
-        <div className="pagination-container">
-          <div className="pagination">
+        <div className="board-pagination-container">
+          <div className="board-pagination">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="page-button"
+              className="board-page-button"
               aria-label="Previous Page"
             >
               이전
@@ -128,7 +127,7 @@ const BoardPage = () => {
               <span
                 key={number + 1}
                 onClick={() => handlePageChange(number + 1)}
-                className={`page-number ${currentPage === number + 1 ? 'active' : ''}`}
+                className={`board-page-number ${currentPage === number + 1 ? 'active' : ''}`}
               >
                 {number + 1}
               </span>
@@ -136,13 +135,12 @@ const BoardPage = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="page-button"
+              className="board-page-button"
               aria-label="Next Page"
             >
               다음
             </button>
           </div>
-       
         </div>
       </div>
       <Footer />

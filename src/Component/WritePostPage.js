@@ -29,16 +29,16 @@ const WritePostPage = () => {
   };
 
   return (
-    <div className="container">
-      <h2 className="page-title">글쓰기</h2>
-      <form className="form" onSubmit={handleSubmit}>
+    <div className="write-container">
+      <form className="write-form" onSubmit={handleSubmit}>
+        <h2 className="write-page-title">글쓰기</h2>
         <div className="form-group">
           <label className="label">
             카테고리:
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="select"
+              className="write-select"
             >
               <option value="공지">공지</option>
               <option value="질문">질문</option>
@@ -51,7 +51,7 @@ const WritePostPage = () => {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="input"
+            className="write-input"
             placeholder="제목을 입력하세요"
             required
           />
@@ -60,7 +60,7 @@ const WritePostPage = () => {
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="textarea"
+            className="write-textarea"
             placeholder="내용을 입력하세요"
             required
           />
@@ -70,10 +70,10 @@ const WritePostPage = () => {
           <input
             type="file"
             onChange={handleFileChange}
-            className="file-input"
+            className="write-file-input"
           />
         </label>
-        <button type="submit" className="button">저장하기</button>
+        <button type="submit" className="write-button">저장하기</button>
       </form>
     </div>
   );

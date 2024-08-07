@@ -1,82 +1,97 @@
-// InfoPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { XMLParser } from 'fast-xml-parser';
 
-const InfoPage = () => {
-  const [data, setData] = useState([]);
+const InfoPage = ({ cntntsNo }) => {
+  const [gardenDtl, setGardenDtl] = useState(null);
+  const [fileList, setFileList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const apiKey = process.env.REACT_APP_API_KEY; // .env 파일에서 API 키를 가져옵니다
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 요청 URL 및 파라미터 설정
-        const response = await axios.get('/service/garden/gardenFileList', {
-          params: {
-            apiKey: apiKey,
-            cntntsNo: 'exampleCntntsNo', // 여기에 유효한 cntntsNo 값을 넣어야 합니다
-          },
-          responseType: 'text', // XML 형식의 응답을 텍스트로 처리
+        const apiKey = process.env.REACT_APP_API_KEY;
+
+        // API 요청
+        const gardenDtlResponse = await axios.get('/service/garden/gardenDtl', {
+          params: { apiKey, cntntsNo }
         });
 
-        // XML 파서를 설정합니다
-        const parser = new XMLParser();
-        const result = parser.parse(response.data);
+        const gardenFileListResponse = await axios.get('/service/garden/gardenFileList', {
+          params: { apiKey, cntntsNo }
+        });
 
-        // XML 데이터를 콘솔에 출력하여 구조 확인
-        console.log('XML 변환 결과:', result);
+        console.log('Garden Detail Response:', gardenDtlResponse.data);
+        console.log('Garden File List Response:', gardenFileListResponse.data);
 
-        // 응답 코드 및 메시지 확인
-        const resultCode = result.response.header.resultCode;
-        const resultMsg = result.response.header.resultMsg;
+        // XML 파서 설정
+        const parser = new XMLParser({
+          ignoreAttributes: false,
+          attributeNamePrefix: '',
+          textNodeName: 'text',
+          removeNSPrefix: true,
+          parseTagValue: true
+        });
 
-        if (resultCode === '0') {
-          // 데이터가 정상인 경우
-          const items = result.response.body.items && result.response.body.items.item ? result.response.body.items.item : [];
-          if (Array.isArray(items)) {
-            setData(items);
-          } else {
-            console.warn('No data items found');
-            setData([]);
-          }
-        } else {
-          console.error('API 오류:', resultMsg);
-          setError(resultMsg);
-        }
-        setLoading(false);
-      } catch (error) {
-        console.error('API 요청 오류:', error);
-        setError(error.message);
+        // XML 파싱
+        const gardenDtlData = parser.parse(gardenDtlResponse.data);
+        const gardenFileListData = parser.parse(gardenFileListResponse.data);
+
+        console.log('Parsed Garden Detail Data:', JSON.stringify(gardenDtlData, null, 2));
+        console.log('Parsed Garden File List Data:', JSON.stringify(gardenFileListData, null, 2));
+
+        // 데이터 추출
+        const gardenDetailItem = gardenDtlData?.response?.body?.item || {};
+        const gardenFileListItems = gardenFileListData?.response?.body?.items || [];
+
+        // 상태 업데이트
+        setGardenDtl(Object.keys(gardenDetailItem).length ? gardenDetailItem : null);
+        setFileList(Array.isArray(gardenFileListItems) ? gardenFileListItems : []);
+      } catch (err) {
+        console.error('Fetch Error:', err);
+        setError('Error fetching data');
+      } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [apiKey]);
+  }, [cntntsNo]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
-      <h1>File List</h1>
-      {data.length > 0 ? (
-        data.map((item, index) => (
-          <div key={index}>
-            <h2>{item.cntntsSj}</h2>
-            <p>File Number: {item.rtnFileSn}</p>
-            <p>File Type Code: {item.rtnFileSeCode}</p>
-            <p>File Type Name: {item.rtnFileSeCodeName}</p>
-            <p>Image Type Code: {item.rtnImgSeCode}</p>
-            <p>Image Type Name: {item.rtnImgSeCodeName}</p>
-            <p>Original File Name: {item.rtnOrginlFileNm}</p>
-            <p>Description: {item.rtnImageDc}</p>
-            <p>File URL: <a href={item.rtnFileUrl} target="_blank" rel="noopener noreferrer">Download</a></p>
-            <p>Thumbnail: <img src={item.rtnThumbFileUrl} alt={item.rtnImageDc} style={{ maxWidth: '200px', maxHeight: '200px' }} /></p>
-          </div>
-        ))
+      {gardenDtl ? (
+        <div>
+          <h1>{gardenDtl.plntbneNm || 'No Name Available'}</h1>
+          <p><strong>영명:</strong> {gardenDtl.plntzrNm || 'No Data Available'}</p>
+          <p><strong>유통명:</strong> {gardenDtl.distbNm || 'No Data Available'}</p>
+          <p><strong>과명:</strong> {gardenDtl.fmlNm || 'No Data Available'}</p>
+          <p><strong>원산지 정보:</strong> {gardenDtl.orgplceInfo || 'No Data Available'}</p>
+          <p><strong>조언 정보:</strong> {gardenDtl.adviseInfo || 'No Data Available'}</p>
+          <p><strong>성장 높이 정보:</strong> {gardenDtl.growthHgInfo || 'No Data Available'}</p>
+          <p><strong>성장 넓이 정보:</strong> {gardenDtl.growthAraInfo || 'No Data Available'}</p>
+          <p><strong>잎 형태 정보:</strong> {gardenDtl.lefStleInfo || 'No Data Available'}</p>
+
+          {fileList.length > 0 ? (
+            <div>
+              <h2>첨부파일 목록</h2>
+              <ul>
+                {fileList.map((file, index) => (
+                  <li key={index}>
+                    <img src={file.rtnThumbFileUrl || ''} alt={file.rtnImageDc || 'No Description'} />
+                    <p>{file.rtnFileSeCodeName || 'No Code Name'}: <a href={file.rtnFileUrl || '#'} target="_blank" rel="noopener noreferrer">{file.rtnOrginlFileNm || 'No File Name'}</a></p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p>No files available</p>
+          )}
+        </div>
       ) : (
         <p>No data available</p>
       )}

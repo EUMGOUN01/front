@@ -1,58 +1,62 @@
 /* 기본적인 컨테이너 스타일 */
-.container {
+.write-container {
   padding: 20px;
   max-width: 1000px;
   margin: 30px auto; /* 중앙 정렬을 위한 자동 여백 */
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* 페이지 제목 스타일 */
-.page-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
 }
 
 /* 폼 스타일 */
-.form {
+.write-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%; /* 폼 요소가 컨테이너의 너비를 가득 채우도록 설정 */
+  max-width: 800px; /* 폼의 최대 너비를 설정 */
+}
+
+/* 페이지 제목 스타일 */
+.write-page-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center; /* 제목을 중앙 정렬 */
 }
 
 /* 입력 필드 및 선택 박스 공통 스타일 */
-.input, .textarea, .file-input {
+.write-input, .write-textarea, .write-file-input {
   padding: 14px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 6px;
   box-sizing: border-box;
-  width: 800px; /* 부모 요소의 너비에 맞게 조정 */
+  width: 100%; /* 부모 요소의 너비에 맞게 조정 */
 }
 
 /* 제목 입력 필드 스타일 */
-.input {
-  max-width: 800px; /* 최대 너비 설정 */
+.write-input {
+  max-width: 100%; /* 최대 너비 설정 */
 }
 
 /* 텍스트 영역 스타일 */
-.textarea {
+.write-textarea {
   height: 250px;
   resize: vertical;
-  max-width: 800px; /* 최대 너비 설정 */
+  max-width: 100%; /* 최대 너비 설정 */
 }
 
 /* 파일 입력 스타일 */
-.file-input {
+.write-file-input {
   padding: 0;
   font-size: 16px;
 }
 
 /* 버튼 스타일 */
-.button {
+.write-button {
   padding: 12px 24px;
   background-color: #004d40;
   color: #fff;
@@ -64,13 +68,13 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.button:hover {
+.write-button:hover {
   background-color: #00332a;
   transform: scale(1.05);
 }
 
 /* 폼 요소의 포커스 스타일 */
-.input:focus, .select:focus, .textarea:focus {
+.write-input:focus, .write-select:focus, .write-textarea:focus {
   border-color: #004d40;
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 77, 64, 0.2);
@@ -78,20 +82,20 @@
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
-  .container {
+  .write-container {
     padding: 15px;
     margin: 20px auto;
   }
 
-  .page-title {
+  .write-page-title {
     font-size: 20px;
   }
 
-  .input, .select, .textarea, .file-input {
+  .write-input, .write-select, .write-textarea, .write-file-input {
     font-size: 14px;
   }
 
-  .button {
+  .write-button {
     padding: 10px 20px;
     font-size: 14px;
   }

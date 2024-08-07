@@ -13,13 +13,13 @@
   margin-bottom: 20px;
 }
 
-.search-container {
+.board-search-container {
   display: flex;
   align-items: center; /* 수직 중앙 정렬 */
-  gap: 10px; /* 요소 사이의 간격 */
+  gap: 15px; /* 요소 사이의 간격 */
 }
 
-.search-input {
+.board-search-input {
   padding: 5px;
   font-size: 14px;
   border: 1px solid #ddd;
@@ -29,7 +29,7 @@
   height: 35px; /* 버튼과 같은 높이 */
 }
 
-.search-button, .write-button {
+.board-search-button, .board-write-button {
   padding: 5px 10px;
   font-size: 14px;
   background-color: #004d40;
@@ -43,52 +43,52 @@
   height: 35px; /* 버튼 높이 설정 */
 }
 
-.search-button:hover, .write-button:hover {
+.board-search-button:hover, .board-write-button:hover {
   background-color: #00332a;
 }
 
-.table {
+.board-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.table th, .table td {
-  border-left: none; /* Remove vertical borders */
-  border-right: none; /* Optional: if you also want to remove right borders */
-  border-top: 1px solid #ddd; /* Add horizontal borders if needed */
+.board-table th, .board-table td {
+  border-left: none; 
+  border-right: none; 
+  border-top: 1px solid #ddd; 
   border-bottom: 1px solid #ddd;
   padding: 8px;
   text-align: center;
 }
 
-.table th {
+.board-table th {
   background-color: #f2f2f2;
 }
 
-.pagination-container {
+.board-pagination-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
 
-.pagination {
+.board-pagination {
   display: flex;
   align-items: center;
 }
 
-.page-number {
+.board-page-number {
   margin: 0 5px;
   cursor: pointer;
 }
 
-.page-number.active {
+.board-page-number.active {
   font-weight: bold;
   text-decoration: underline;
 }
 
-.page-button {
+.board-page-button {
   margin: 0 5px;
   cursor: pointer;
   background: none;
@@ -97,13 +97,13 @@
   font-size: 14px;
 }
 
-.page-button:disabled {
+.board-page-button:disabled {
   color: #bbb;
   cursor: not-allowed;
 }
 
 /* Footer 스타일 */
-.footer {
+.board-footer {
   background-color: #f1f1f1;
   padding: 10px;
   text-align: center;
@@ -117,7 +117,7 @@
   font-weight: bold;
 }
 
-.button-container {
+.board-button-container {
   display: flex;
   align-items: center;
   gap: 20px; /* 버튼 사이의 여백 */
