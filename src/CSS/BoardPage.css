@@ -1,22 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+
 .board-container {
   padding: 20px;
   max-width: 1200px;
   margin: 40px auto;
   position: relative;
   min-height: calc(100vh - 60px); 
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  gap: 20px; /* 제목과 검색창 사이의 간격 */
+  font-size: 36px;
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-search-container {
   display: flex;
   align-items: center; /* 수직 중앙 정렬 */
-  gap: 15px; /* 요소 사이의 간격 */
+  gap: 10px; /* 검색창과 버튼 사이의 간격 */
+  margin-left: auto; /* 오른쪽으로 밀어 붙이기 */
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
+}
+
+.board-search-wrapper {
+  display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
+  position: relative; /* 아이콘의 절대 위치 지정 */
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-search-input {
@@ -24,9 +39,25 @@
   font-size: 14px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  flex-grow: 1; /* 입력창이 가능한 공간을 차지하도록 함 */
   box-sizing: border-box; /* 패딩과 테두리가 요소의 전체 너비에 포함되도록 함 */
   height: 35px; /* 버튼과 같은 높이 */
+  padding-right: 30px; /* 아이콘 공간 확보 */
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
+}
+
+.board-search-icon {
+  position: absolute;
+  right: 10px; /* 오른쪽 여백 */
+  color: #9b9b9b; /* 아이콘 색상 */
+  font-size: 20px; /* 아이콘 크기 조절 */
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
+}
+
+.board-button-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 버튼 사이의 간격 조정 */
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-search-button, .board-write-button {
@@ -35,22 +66,22 @@
   background-color: #004d40;
   color: white;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  display: flex; /* 버튼 내 텍스트 및 아이콘 수직 중앙 정렬 */
-  align-items: center;
   height: 35px; /* 버튼 높이 설정 */
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-search-button:hover, .board-write-button:hover {
   background-color: #00332a;
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-table th, .board-table td {
@@ -60,10 +91,12 @@
   border-bottom: 1px solid #ddd;
   padding: 8px;
   text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-table th {
   background-color: #f2f2f2;
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-pagination-container {
@@ -71,21 +104,25 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-pagination {
   display: flex;
   align-items: center;
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-page-number {
   margin: 0 5px;
   cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-page-number.active {
   font-weight: bold;
   text-decoration: underline;
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-page-button {
@@ -95,11 +132,13 @@
   border: none;
   color: #004d40;
   font-size: 14px;
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 .board-page-button:disabled {
   color: #bbb;
   cursor: not-allowed;
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }
 
 /* Footer 스타일 */
@@ -110,15 +149,5 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-}
-
-.board-header h1 {
-  font-size: 2rem; /* Adjust the size as needed */
-  font-weight: bold;
-}
-
-.board-button-container {
-  display: flex;
-  align-items: center;
-  gap: 20px; /* 버튼 사이의 여백 */
+  font-family: 'Noto Sans KR', sans-serif;  /* 폰트 패밀리 적용 */
 }

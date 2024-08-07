@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CiSearch } from 'react-icons/ci';
 import '../CSS/BoardPage.css';
 import Footer from './Footer';
 
@@ -8,32 +9,25 @@ const BoardPage = () => {
   const [boardData] = useState([
     { id: 1, category: '공지', title: '첫번째 게시물', author: 'admin', date: '2024-08-01', views: 10 },
     { id: 2, category: '질문', title: '두번째 게시물', author: 'user1', date: '2024-08-02', views: 20 },
-    { id: 3, category: '공지', title: '세번째 게시물', author: 'admin', date: '2024-08-03', views: 5 },
-    { id: 4, category: '질문', title: '네번째 게시물', author: 'user2', date: '2024-08-04', views: 15 },
-    { id: 5, category: '기타', title: '다섯번째 게시물', author: 'user3', date: '2024-08-05', views: 25 },
-    { id: 6, category: '공지', title: '여섯번째 게시물', author: 'admin', date: '2024-08-06', views: 8 },
-    { id: 7, category: '질문', title: '일곱번째 게시물', author: 'user1', date: '2024-08-07', views: 18 },
-    { id: 8, category: '기타', title: '여덟번째 게시물', author: 'user2', date: '2024-08-08', views: 12 },
-    { id: 9, category: '공지', title: '아홉번째 게시물', author: 'admin', date: '2024-08-09', views: 30 },
-    { id: 10, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 11, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 12, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 13, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 14, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 15, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 16, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 17, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 18, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 19, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 20, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 21, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 22, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 23, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 24, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 25, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 26, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 27, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
-    { id: 28, category: '질문', title: '열번째 게시물', author: 'user3', date: '2024-08-10', views: 22 },
+    { id: 3, category: '공지', title: '첫번째 게시물', author: 'admin', date: '2024-08-01', views: 10 },
+    { id: 4, category: '질문', title: '두번째 게시물', author: 'user1', date: '2024-08-02', views: 20 },
+    { id: 5, category: '공지', title: '첫번째 게시물', author: 'admin', date: '2024-08-01', views: 10 },
+    { id: 6, category: '질문', title: '두번째 게시물', author: 'user1', date: '2024-08-02', views: 20 },
+    { id: 7, category: '공지', title: '첫번째 게시물', author: 'admin', date: '2024-08-01', views: 10 },
+    { id: 8, category: '질문', title: '두번째 게시물', author: 'user1', date: '2024-08-02', views: 20 },
+    { id: 9, category: '공지', title: '첫번째 게시물', author: 'admin', date: '2024-08-01', views: 10 },
+    { id: 10, category: '질문', title: '두번째 게시물', author: 'user1', date: '2024-08-02', views: 20 },
+    { id: 11, category: '공지', title: '첫번째 게시물', author: 'admin', date: '2024-08-01', views: 10 },
+    { id: 12, category: '질문', title: '두번째 게시물', author: 'user1', date: '2024-08-02', views: 20 },
+    { id: 13, category: '공지', title: '첫번째 게시물', author: 'admin', date: '2024-08-01', views: 10 },
+    { id: 14, category: '질문', title: '두번째 게시물', author: 'user1', date: '2024-08-02', views: 20 },
+    { id: 15, category: '공지', title: '첫번째 게시물', author: 'admin', date: '2024-08-01', views: 10 },
+    { id: 16, category: '질문', title: '두번째 게시물', author: 'user1', date: '2024-08-02', views: 20 },
+    { id: 17, category: '공지', title: '첫번째 게시물', author: 'admin', date: '2024-08-01', views: 10 },
+    { id: 18, category: '질문', title: '두번째 게시물', author: 'user1', date: '2024-08-02', views: 20 },
+    { id: 19, category: '공지', title: '첫번째 게시물', author: 'admin', date: '2024-08-01', views: 10 },
+    { id: 20, category: '질문', title: '두번째 게시물', author: 'user1', date: '2024-08-02', views: 20 }
+
   ]);
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -70,16 +64,19 @@ const BoardPage = () => {
         <div className="board-header">
           <h1>자유 게시판</h1>
           <div className="board-search-container">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="검색어를 입력하세요"
-              className="board-search-input"
-            />
+            <div className="board-search-wrapper">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="검색어를 입력하세요"
+                className="board-search-input"
+              />
+              <CiSearch className="board-search-icon" />
+            </div>
             <div className="board-button-container">
-              <button onClick={handleSearch} className="board-search-button">조회</button>
-              <button onClick={() => navigate('/write')} className="board-write-button">글쓰기</button>
+              <button onClick={handleSearch} className="board-search-button">검색</button>
+              <button onClick={() => navigate('/write')} className="board-write-button">작성</button>
             </div>
           </div>
         </div>
@@ -108,7 +105,7 @@ const BoardPage = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="6">No posts available</td>
+                <td colSpan="6">게시물이 없습니다</td>
               </tr>
             )}
           </tbody>

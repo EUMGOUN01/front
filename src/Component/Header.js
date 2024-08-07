@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiMenu } from 'react-icons/fi';
 import '../CSS/Header.css';  // CSS 파일을 임포트
 
 const Header = () => {
@@ -14,11 +13,10 @@ const Header = () => {
         <span className="top-nav-item" onClick={() => navigate('/logout')}>로그아웃</span>
       </div>
       <nav>
-        <NavItem href="/info">식물 사전</NavItem>
-        <NavItem href="/plant-sharing">식물 나눔</NavItem>
+        <NavItem href="/info">식물사전</NavItem>
+        <NavItem href="/plant-sharing">식물나눔</NavItem>
         <NavItem href="/board">커뮤니티</NavItem>
-        <NavItem href="/community-garden">공용 텃밭</NavItem>
-        <FiMenu className="menu-icon" />
+        <NavItem href="/community-garden">공용텃밭</NavItem>
       </nav>
     </header>
   );

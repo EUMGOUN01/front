@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-// import Header from './Header'; 
+import { FaChevronRight } from 'react-icons/fa6'; // 아이콘 import
 import ImageSlider from './ImageSlider'; 
 import Footer from './Footer'; 
 import '../CSS/Homepage.css';
@@ -21,19 +21,22 @@ const Homepage = () => {
             className="homepage-button yellow"
             onClick={() => handleNavigation('/info')}
           >
-            식물정보
+            식물사전
+            <FaChevronRight className="icon" />
           </div>
           <div
             className="homepage-button green"
             onClick={() => handleNavigation('/sharing')}
           >
-            식물 나눔
+            식물나눔
+            <FaChevronRight className="icon" />
           </div>
           <div
             className="homepage-button blue"
             onClick={() => handleNavigation('/board')}
           >
             커뮤니티
+            <FaChevronRight className="icon" />
           </div>
         </div>
       </div>

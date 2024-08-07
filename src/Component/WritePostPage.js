@@ -31,7 +31,7 @@ const WritePostPage = () => {
   return (
     <div className="write-container">
       <form className="write-form" onSubmit={handleSubmit}>
-        <h2 className="write-page-title">글쓰기</h2>
+        <h2 className="write-page-title">자유 게시판</h2>
         <div className="form-group">
           <label className="label">
             카테고리:
@@ -73,7 +73,7 @@ const WritePostPage = () => {
             className="write-file-input"
           />
         </label>
-        <button type="submit" className="write-button">저장하기</button>
+        <button type="submit" className="write-button">작성</button>
       </form>
     </div>
   );

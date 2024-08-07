@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../CSS/ImageSlider.css'; // CSS 파일 import
 
 const images = [
@@ -12,6 +12,16 @@ const images = [
 const ImageSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [transition, setTransition] = useState('none');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTransition('transform 0.5s ease-in-out');
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000); // 슬라이드가 3초마다 변경됨
+
+    // 컴포넌트가 언마운트 될 때 타이머를 정리
+    return () => clearInterval(interval);
+  }, []);
 
   const goToSlide = (index) => {
     setTransition('transform 0.5s ease-in-out');
