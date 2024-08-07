@@ -27,9 +27,9 @@ const CommunityGardenPage = () => {
       <div className="Community-text-section">
         <h1>공용텃밭이란</h1>
         <p>
-          부산 공영 텃밭은 도심 속에서 친환경 농업을 실천하며 도시민들이 직접 농작물을 <br/>재배하고,
-          안전한 먹거리를 제공받을 수 있는 공간입니다. 이곳에서는 이웃과의 소통과 <br/>나눔도 함께
-          이루어지며, 자연과 가까운 생활을 경험할 수 있습니다.
+          부산 공영 텃밭은 도심 속에서 친환경 농업을 실천하며 도시민들이 직접 농작물을
+          <br /> 재배하고, 안전한 먹거리를 제공받을 수 있는 공간입니다. 이곳에서는 이웃과의 소통과
+          <br /> 나눔도 함께 이루어지며, 자연과 가까운 생활을 경험할 수 있습니다.
         </p>
         <div className="Community-more-info">
           <a
@@ -46,7 +46,7 @@ const CommunityGardenPage = () => {
       <div className="Community-map-section">
         <Map
           center={{ lat: 35.084138, lng: 128.873972 }}
-          style={{ width: '100%', height: '600px' }}
+          style={{ width: '100%', height: '500px' }}
           level={8}
         >
           {gardenData.map((garden) => (
