@@ -17,58 +17,58 @@ const SignupPage = () => {
 
   return (
     <div>
-      <div className="page">
-        <div className="form-container">
-          <h2 className="title">회원가입</h2>
-          <form onSubmit={handleSignup} className="form">
-            <div className="input-group">
-              <label htmlFor="username" className="label">아이디:</label>
+      <div className="Signpage">
+        <div className="Signform-container">
+          <h2 className="Signtitle">회원가입</h2>
+          <form onSubmit={handleSignup} className="Signform">
+            <div className="Signinput-group">
+              <label htmlFor="username" className="Signlabel">아이디:</label>
               <input
                 type="text"
                 id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="input"
+                className="Signinput"
                 required
               />
             </div>
-            <div className="input-group">
-              <label htmlFor="password" className="label">비밀번호:</label>
+            <div className="Signinput-group">
+              <label htmlFor="password" className="Signlabel">비밀번호:</label>
               <input
                 type="password"
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input"
+                className="Signinput"
                 required
               />
             </div>
-            <div className="input-group">
-              <label htmlFor="nickname" className="label">닉네임:</label>
+            <div className="Signinput-group">
+              <label htmlFor="nickname" className="Signlabel">닉네임:</label>
               <input
                 type="text"
                 id="nickname"
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
-                className="input"
+                className="Signinput"
                 required
               />
             </div>
-            <div className="input-group">
-              <label htmlFor="email" className="label">이메일:</label>
+            <div className="Signinput-group">
+              <label htmlFor="email" className="Signlabel">이메일:</label>
               <input
                 type="email"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input"
+                className="Signinput"
                 required
               />
             </div>
-            <button type="submit" className="button">회원가입</button>
+            <button type="submit" className="Signbutton">회원가입</button>
           </form>
-          <div className="link-container">
-            <a href="/login" className="button login-button">로그인</a>
+          <div className="Signlink-container">
+            <a href="/login" className="Signbutton Signlogin-button">로그인</a>
           </div>
         </div>
       </div>
