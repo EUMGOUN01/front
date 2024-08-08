@@ -3,7 +3,7 @@ import { Map, MapMarker, MapInfoWindow } from 'react-kakao-maps-sdk';
 import { HiArrowCircleRight } from 'react-icons/hi';
 import '../CSS/CommunityGardenPage.css';
 
-// Sample garden data
+// 테스트용 지도
 const gardenData = [
   {
     id: 1,

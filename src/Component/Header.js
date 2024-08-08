@@ -7,11 +7,13 @@ const Header = () => {
 
   return (
     <header className="header">
-      <h1 onClick={() => navigate('/')}>Greenery</h1>
       <div className="top-nav">
         <span className="top-nav-item" onClick={() => navigate('/login')}>로그인</span>
         <span className="top-nav-item" onClick={() => navigate('/logout')}>로그아웃</span>
       </div>
+      <hr className="divider" />
+      <h1 onClick={() => navigate('/')}>Greenery</h1>
+      <hr className="divider" />
       <nav>
         <NavItem href="/info">식물사전</NavItem>
         <NavItem href="/plant-sharing">식물나눔</NavItem>

@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+.plant-sharing-board-write-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 40px auto;
+  font-family: 'Noto Sans KR', sans-serif; /* 폰트 패밀리 적용 */
+}
+
+.plant-sharing-board-write-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 폼 요소 사이의 간격 */
+}
+
+.plant-sharing-board-write-page-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-family: 'Noto Sans KR', sans-serif; /* 폰트 패밀리 적용 */
+}
+
+.plant-sharing-board-label {
+  font-size: 16px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Noto Sans KR', sans-serif; /* 폰트 패밀리 적용 */
+}
+
+.plant-sharing-board-select, 
+.plant-sharing-board-input, 
+.plant-sharing-board-textarea, 
+.plant-sharing-board-file-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box; /* 패딩과 테두리가 요소의 전체 너비에 포함되도록 함 */
+}
+
+.plant-sharing-board-input, 
+.plant-sharing-board-textarea {
+  width: 100%;
+}
+
+.plant-sharing-board-textarea {
+  height: 200px; /* 텍스트 영역 높이 설정 */
+}
+
+.plant-sharing-board-button {
+  padding: 10px 20px; /* 버튼의 패딩을 줄여서 글자 크기에 맞춤 */
+  background-color: #0F2C22;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal; /* 버튼 글자 굵기 설정 */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: 'Noto Sans KR', sans-serif; /* 폰트 패밀리 적용 */
+  align-self: flex-end; /* 버튼을 오른쪽 끝으로 정렬 */
+}
+
+.plant-sharing-board-button:hover {
+  background-color: #00332a;
+  font-family: 'Noto Sans KR', sans-serif; /* 폰트 패밀리 적용 */
+}
