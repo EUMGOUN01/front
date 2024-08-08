@@ -47,20 +47,65 @@
   height: 200px; /* 텍스트 영역 높이 설정 */
 }
 
+/* 버튼 스타일 */
+.plant-sharing-board-button, .plant-search-button {
+  padding: 10px 15px; /* 버튼의 패딩을 줄여서 글자 크기에 맞춤 */
+  background-color: #0F2C22;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px; /* 버튼 글자 크기 줄이기 */
+  font-weight: normal; /* 버튼 글자 굵기 설정 */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: 'Noto Sans KR', sans-serif; /* 폰트 패밀리 적용 */
+  display: flex;
+  align-items: center; /* 수직 정렬 */
+  justify-content: center; /* 수평 정렬 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  height: 40px; /* 버튼 높이 설정 */
+}
+
+/* 버튼 높이와 입력 필드 높이 일치시키기 */
+.plant-sharing-board-input,
+.plant-search-button,
 .plant-sharing-board-button {
-  padding: 10px 20px; /* 버튼의 패딩을 줄여서 글자 크기에 맞춤 */
+  height: 40px; /* 버튼 및 입력 필드 높이 설정 */
+}
+
+.plant-sharing-board-button:hover, .plant-search-button:hover {
+  background-color: #00332a;
+  font-family: 'Noto Sans KR', sans-serif; /* 폰트 패밀리 적용 */
+}
+
+/* 검색 버튼과 입력 필드 사이의 간격 조정 */
+.plant-search-container {
+  display: flex;
+  align-items: center; /* 세로 방향 정렬을 중앙으로 설정 */
+  gap: 10px; /* 버튼과 입력 필드 사이의 간격 설정 */
+}
+
+.plant-search-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  height: 40px; /* 입력 필드의 높이 설정 */
+  flex: 1; /* 입력 필드가 가능한 공간을 채우도록 설정 */
+}
+
+.plant-search-button {
+  padding: 10px 20px;
   background-color: #0F2C22;
   color: #fff;
   border: none;
   cursor: pointer;
   font-size: 16px;
-  font-weight: normal; /* 버튼 글자 굵기 설정 */
+  height: 40px; /* 버튼의 높이 설정 */
   transition: background-color 0.3s ease, transform 0.2s ease;
-  font-family: 'Noto Sans KR', sans-serif; /* 폰트 패밀리 적용 */
-  align-self: flex-end; /* 버튼을 오른쪽 끝으로 정렬 */
+  display: flex; /* 텍스트를 가로 방향으로 설정 */
+  align-items: center; /* 텍스트를 수직 중앙으로 정렬 */
 }
 
-.plant-sharing-board-button:hover {
+.plant-search-button:hover {
   background-color: #00332a;
-  font-family: 'Noto Sans KR', sans-serif; /* 폰트 패밀리 적용 */
 }

@@ -5,31 +5,11 @@ import '../CSS/LoginPage.css';
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-
-    try {
-      const response = await fetch('http://localhost:8080/public/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        // 로그인 성공 시 토큰 저장 또는 상태 관리 도구 사용
-        // localStorage.setItem('token', data.token);
-        navigate('/');
-      } else {
-        throw new Error('로그인 실패');
-      }
-    } catch (err) {
-      console.error('Login failed:', err);
-      setError('아이디 또는 비밀번호가 올바르지 않습니다.');
-    }
+    navigate('/');
   };
 
   return (
@@ -59,11 +39,14 @@ const LoginPage = () => {
               required
             />
           </div>
-          {error && <p className="login-error-message">{error}</p>}
           <button type="submit" className="login-submit-button">로그인</button>
           <a href="/signup" className="signup-button">회원가입</a>
         </form>
+        <div className="login-link-container">
+         
+        </div>
       </div>
+     
     </div>
   );
 };

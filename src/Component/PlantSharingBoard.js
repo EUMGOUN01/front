@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CiSearch } from 'react-icons/ci';
 import '../CSS/PlantSharingBoard.css';
@@ -6,25 +6,16 @@ import Footer from './Footer';
 
 const PlantSharingBoard = () => {
   const navigate = useNavigate();
-  const [boardData, setBoardData] = useState([]);
+  const [boardData, setBoardData] = useState([
+    { share_board_id: 1, type: '나눔', title: '첫번째 식물 나눔', username: 'admin', createdate: '2024-08-01', view: 10 },
+    { share_board_id: 2, type: '나눔중', title: '두번째 식물 교환', username: 'user1', createdate: '2024-08-02', view: 20 },
+    { share_board_id: 3, type: '나눔', title: '세번째 식물 나눔', username: 'admin', createdate: '2024-08-03', view: 15 },
+    // ... 추가 데이터
+  ]);
+  
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 15;
-
-  // Function to load board data
-  const loadBoard = async () => {
-    try {
-      const response = await fetch('http://localhost:8080/public/shareboard');
-      const result = await response.json();
-      setBoardData(result);
-    } catch (error) {
-      console.error('Error fetching Board:', error);
-    }
-  };
-
-  useEffect(() => {
-    loadBoard(); // Load board data on component mount
-  }, []);
 
   const filteredPosts = useMemo(() => boardData.filter(post =>
     post.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -45,6 +36,14 @@ const PlantSharingBoard = () => {
   const handleSearch = () => {
     setCurrentPage(1);
   };
+
+  const handlePostClick = (id) => {
+    navigate(`/plant-sharing/${id}`);
+  };
+
+  useEffect(() => {
+    document.title = "식물 나눔";
+  }, []);
 
   return (
     <>
@@ -82,12 +81,12 @@ const PlantSharingBoard = () => {
           <tbody>
             {currentPosts.length > 0 ? (
               currentPosts.map((post, index) => (
-                <tr key={post.share_board_id}>
+                <tr key={post.share_board_id} onClick={() => handlePostClick(post.share_board_id)}>
                   <td>{indexOfFirstPost + index + 1}</td>
                   <td>{post.type}</td>
                   <td>{post.title}</td>
                   <td>{post.username}</td>
-                  <td>{post.createdate.split('T')[0]}</td>
+                  <td>{new Date(post.createdate).toLocaleDateString()}</td>
                   <td>{post.view}</td>
                 </tr>
               ))

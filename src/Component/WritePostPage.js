@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import '../CSS/WritePostPage.css'; // CSS 파일 경로
 
 const WritePostPage = () => {
@@ -14,29 +13,23 @@ const WritePostPage = () => {
     setFile(e.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    // FormData 객체 생성
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('category', category);
-    formData.append('content', content);
-    formData.append('file', file); // 파일 데이터 추가
+    // 데이터를 콘솔에 출력하거나 상태로 저장할 수 있습니다.
+    console.log('제목:', title);
+    console.log('카테고리:', category);
+    console.log('내용:', content);
+    console.log('파일:', file);
 
-    try {
-      // API에 POST 요청
-      await axios.post('/api/freeboard', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      // 성공적으로 전송된 후 페이지 이동
-      navigate('/freeboard');
-    } catch (error) {
-      console.error('Error uploading post:', error);
-      alert('게시물 업로드에 실패했습니다.');
-    }
+    // 폼 데이터를 처리한 후 페이지를 리셋
+    setTitle('');
+    setCategory('공지');
+    setContent('');
+    setFile(null);
+
+    // 페이지 이동 (필요시)
+    navigate('/board');
   };
 
   return (

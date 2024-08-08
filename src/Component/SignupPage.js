@@ -1,31 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import Footer from './Footer';
 import '../CSS/SignupPage.css';
 
 const SignupPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
 
-  const handleSignup = async (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-
-    try {
-      await axios.post('http://localhost:8080/public/signin', {
-        username,
-        password,
-        alias: username, // alias 필드로 username 사용
-        email
-      });
-
-      // 성공적으로 전송된 후 페이지 이동
-      navigate('/login');
-    } catch (error) {
-      console.error('회원가입 중 오류 발생:', error);
-      alert('회원가입에 실패했습니다.');
-    }
+    navigate('/login');
   };
 
   return (
@@ -57,6 +44,17 @@ const SignupPage = () => {
               />
             </div>
             <div className="Signinput-group">
+              <label htmlFor="nickname" className="Signlabel">닉네임:</label>
+              <input
+                type="text"
+                id="nickname"
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+                className="Signinput"
+                required
+              />
+            </div>
+            <div className="Signinput-group">
               <label htmlFor="email" className="Signlabel">이메일:</label>
               <input
                 type="email"
@@ -74,6 +72,7 @@ const SignupPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

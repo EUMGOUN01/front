@@ -1,31 +1,22 @@
-import React, { useState, useEffect, useMemo } from 'react';
+// src/Component/BoardPage.js
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CiSearch } from 'react-icons/ci';
-import axios from 'axios';
-import '../CSS/BoardPage.css'; // CSS 파일 경로
+import '../CSS/BoardPage.css';
 import Footer from './Footer';
+
+const mockData = [
+  { freeBoardId: 1, privateField: '공개', type: '공지', title: '첫번째 게시물', content: '내용1', img: '', username: 'admin', view: 10, createDate: '2024-08-01T00:00:00Z' },
+  { freeBoardId: 2, privateField: '공개', type: '질문', title: '두번째 게시물', content: '내용2', img: '', username: 'user1', view: 20, createDate: '2024-08-02T00:00:00Z' },
+  // ... 추가 데이터
+];
 
 const BoardPage = () => {
   const navigate = useNavigate();
-  const [boardData, setBoardData] = useState([]);
+  const [boardData] = useState(mockData);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const postsPerPage = 15;
-
-  // 게시판 데이터 로드 함수
-  const loadBoard = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/public/freeboard');
-      setBoardData(response.data);
-    } catch (error) {
-      console.error('Error fetching board data:', error);
-    }
-  };
-
-  // 컴포넌트 마운트 시 데이터 로드
-  useEffect(() => {
-    loadBoard();
-  }, []);
 
   const filteredPosts = useMemo(() => boardData.filter(post =>
     post.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -47,8 +38,8 @@ const BoardPage = () => {
     setCurrentPage(0);
   };
 
-  useEffect(() => {
-    document.title = "자유 게시판";
+  React.useEffect(() => {
+    document.title = "자유 게시판"; 
   }, []);
 
   return (
@@ -87,7 +78,11 @@ const BoardPage = () => {
           <tbody>
             {currentPosts.length > 0 ? (
               currentPosts.map((post, index) => (
-                <tr key={post.freeBoardId}>
+                <tr
+                  key={post.freeBoardId}
+                  onClick={() => navigate(`/post/${post.freeBoardId}`)}
+                  className="board-row"
+                >
                   <td>{indexOfFirstPost + index + 1}</td>
                   <td>{post.type}</td>
                   <td>{post.title}</td>
