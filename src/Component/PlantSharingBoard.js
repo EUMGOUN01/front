@@ -6,7 +6,7 @@ import Footer from './Footer';
 
 const PlantSharingBoard = () => {
   const navigate = useNavigate();
-  const [boardData, setBoardData] = useState([
+  const [boardData] = useState([
     { share_board_id: 1, type: '나눔', title: '첫번째 식물 나눔', username: 'admin', createdate: '2024-08-01', view: 10 },
     { share_board_id: 2, type: '나눔중', title: '두번째 식물 교환', username: 'user1', createdate: '2024-08-02', view: 20 },
     { share_board_id: 3, type: '나눔', title: '세번째 식물 나눔', username: 'admin', createdate: '2024-08-03', view: 15 },

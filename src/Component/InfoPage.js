@@ -1,99 +1,135 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { XMLParser } from 'fast-xml-parser';
 
-const InfoPage = ({ cntntsNo }) => {
-  const [gardenDtl, setGardenDtl] = useState(null);
-  const [fileList, setFileList] = useState([]);
+const InfoPage = () => {
+  const [gardenList, setGardenList] = useState([]);
+  const [plantDetail, setPlantDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedPlant, setSelectedPlant] = useState(null);
+
+  const apiKey = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchGardenList = async () => {
+      setLoading(true);
+      setError(null);
+
       try {
-        const apiKey = process.env.REACT_APP_API_KEY;
+        const response = await fetch(`/service/garden/gardenList?apiKey=${apiKey}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.text();
+        
+        // XML 데이터 콘솔에 출력
+        console.log("XML Data:", data);
 
-        // API 요청
-        const gardenDtlResponse = await axios.get('/service/garden/gardenDtl', {
-          params: { apiKey, cntntsNo }
-        });
+        // XML을 JSON으로 변환
+        const parser = new XMLParser();
+        const json = parser.parse(data);
 
-        const gardenFileListResponse = await axios.get('/service/garden/gardenFileList', {
-          params: { apiKey, cntntsNo }
-        });
+        // JSON 데이터 구조를 콘솔에 출력
+        console.log("Parsed JSON:", json);
 
-        console.log('Garden Detail Response:', gardenDtlResponse.data);
-        console.log('Garden File List Response:', gardenFileListResponse.data);
-
-        // XML 파서 설정
-        const parser = new XMLParser({
-          ignoreAttributes: false,
-          attributeNamePrefix: '',
-          textNodeName: 'text',
-          removeNSPrefix: true,
-          parseTagValue: true
-        });
-
-        // XML 파싱
-        const gardenDtlData = parser.parse(gardenDtlResponse.data);
-        const gardenFileListData = parser.parse(gardenFileListResponse.data);
-
-        console.log('Parsed Garden Detail Data:', JSON.stringify(gardenDtlData, null, 2));
-        console.log('Parsed Garden File List Data:', JSON.stringify(gardenFileListData, null, 2));
-
-        // 데이터 추출
-        const gardenDetailItem = gardenDtlData?.response?.body?.item || {};
-        const gardenFileListItems = gardenFileListData?.response?.body?.items || [];
-
-        // 상태 업데이트
-        setGardenDtl(Object.keys(gardenDetailItem).length ? gardenDetailItem : null);
-        setFileList(Array.isArray(gardenFileListItems) ? gardenFileListItems : []);
-      } catch (err) {
-        console.error('Fetch Error:', err);
-        setError('Error fetching data');
+        // 데이터 경로 확인 후 items 추출
+        const items = json.response.body.items.item || [];
+        setGardenList(items);
+      } catch (error) {
+        console.error('Error fetching garden list:', error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
-  }, [cntntsNo]);
+    fetchGardenList();
+  }, [apiKey]);
+
+  useEffect(() => {
+    if (selectedPlant) {
+      const fetchPlantDetail = async () => {
+        setLoading(true);
+        setError(null);
+
+        try {
+          const response = await fetch(`/service/garden/gardenDtl?apiKey=${apiKey}&cntntsNo=${selectedPlant}`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.text();
+          const parser = new XMLParser();
+          const json = parser.parse(data);
+          setPlantDetail(json.response.body.item);
+        } catch (error) {
+          console.error('Error fetching plant detail:', error);
+          setError(error.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchPlantDetail();
+    }
+  }, [selectedPlant, apiKey]);
+
+  const handlePlantClick = (cntntsNo) => {
+    setSelectedPlant(cntntsNo);
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
-      {gardenDtl ? (
-        <div>
-          <h1>{gardenDtl.plntbneNm || 'No Name Available'}</h1>
-          <p><strong>영명:</strong> {gardenDtl.plntzrNm || 'No Data Available'}</p>
-          <p><strong>유통명:</strong> {gardenDtl.distbNm || 'No Data Available'}</p>
-          <p><strong>과명:</strong> {gardenDtl.fmlNm || 'No Data Available'}</p>
-          <p><strong>원산지 정보:</strong> {gardenDtl.orgplceInfo || 'No Data Available'}</p>
-          <p><strong>조언 정보:</strong> {gardenDtl.adviseInfo || 'No Data Available'}</p>
-          <p><strong>성장 높이 정보:</strong> {gardenDtl.growthHgInfo || 'No Data Available'}</p>
-          <p><strong>성장 넓이 정보:</strong> {gardenDtl.growthAraInfo || 'No Data Available'}</p>
-          <p><strong>잎 형태 정보:</strong> {gardenDtl.lefStleInfo || 'No Data Available'}</p>
-
-          {fileList.length > 0 ? (
-            <div>
-              <h2>첨부파일 목록</h2>
-              <ul>
-                {fileList.map((file, index) => (
-                  <li key={index}>
-                    <img src={file.rtnThumbFileUrl || ''} alt={file.rtnImageDc || 'No Description'} />
-                    <p>{file.rtnFileSeCodeName || 'No Code Name'}: <a href={file.rtnFileUrl || '#'} target="_blank" rel="noopener noreferrer">{file.rtnOrginlFileNm || 'No File Name'}</a></p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <p>No files available</p>
-          )}
-        </div>
+      <h1>Garden List</h1>
+      {gardenList && gardenList.length > 0 ? (
+        <ul>
+          {gardenList.map((garden) => (
+            <li key={garden.cntntsNo} onClick={() => handlePlantClick(garden.cntntsNo)}>
+              <p><strong>Content Number:</strong> {garden.cntntsNo}</p>
+              <p><strong>Garden Name:</strong> {garden.cntntsSj}</p>
+              <p><strong>Description:</strong> {garden.rtnImageDc}</p>
+              <p><strong>File Name:</strong> {garden.rtnOrginlFileNm}</p>
+              <p><strong>File URL:</strong> <a href={garden.rtnFileUrl} target="_blank" rel="noopener noreferrer">Download</a></p>
+            </li>
+          ))}
+        </ul>
       ) : (
-        <p>No data available</p>
+        <p>No gardens available.</p>
+      )}
+
+      {plantDetail && (
+        <div>
+          <h1>Plant Detail</h1>
+          <p><strong>Content Number:</strong> {plantDetail.cntntsNo}</p>
+          <p><strong>Latin Name:</strong> {plantDetail.plntbneNm}</p>
+          <p><strong>English Name:</strong> {plantDetail.plntzrNm}</p>
+          <p><strong>Distribution Name:</strong> {plantDetail.distbNm}</p>
+          <p><strong>Family Name:</strong> {plantDetail.fmlNm}</p>
+          <p><strong>Origin Info:</strong> {plantDetail.orgplceInfo}</p>
+          <p><strong>Advice Info:</strong> {plantDetail.adviseInfo}</p>
+          <p><strong>Growth Height:</strong> {plantDetail.growthHgInfo}</p>
+          <p><strong>Growth Width:</strong> {plantDetail.growthAraInfo}</p>
+          <p><strong>Leaf Style Info:</strong> {plantDetail.lefStleInfo}</p>
+          <p><strong>Smell Code Name:</strong> {plantDetail.smellCodeNm}</p>
+          <p><strong>Toxicity Info:</strong> {plantDetail.toxctyInfo}</p>
+          <p><strong>Propagation Era Info:</strong> {plantDetail.prpgtEraInfo}</p>
+          <p><strong>Other Era Info:</strong> {plantDetail.etcEraInfo}</p>
+          <p><strong>Management Level Code:</strong> {plantDetail.managelevelCodeNm}</p>
+          <p><strong>Growth Rate Code:</strong> {plantDetail.grwtveCodeNm}</p>
+          <p><strong>Growth Temperature Code:</strong> {plantDetail.grwhTpCodeNm}</p>
+          <p><strong>Winter Lowest Temperature Code:</strong> {plantDetail.winterLwetTpCodeNm}</p>
+          <p><strong>Humidity Code Name:</strong> {plantDetail.hdCodeNm}</p>
+          <p><strong>Fertilizer Info:</strong> {plantDetail.frtlzInfo}</p>
+          <p><strong>Soil Info:</strong> {plantDetail.soilInfo}</p>
+          <p><strong>Water Cycle Spring Code:</strong> {plantDetail.watercycleSprngCodeNm}</p>
+          <p><strong>Water Cycle Summer Code:</strong> {plantDetail.watercycleSummerCodeNm}</p>
+          <p><strong>Water Cycle Autumn Code:</strong> {plantDetail.watercycleAutumnCodeNm}</p>
+          <p><strong>Water Cycle Winter Code:</strong> {plantDetail.watercycleWinterCodeNm}</p>
+          <p><strong>Pest Management Info:</strong> {plantDetail.dlthtsManageInfo}</p>
+          <p><strong>Special Management Info:</strong> {plantDetail.speclmanageInfo}</p>
+        </div>
       )}
     </div>
   );
