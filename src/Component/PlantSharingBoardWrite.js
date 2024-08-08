@@ -11,7 +11,6 @@ const PlantSharingBoardWrite = () => {
   const [content, setContent] = useState('');
   const [file, setFile] = useState(null);
   const [searchAddress, setSearchAddress] = useState('');
-  const [region, setRegion] = useState('');
   const mapContainer = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null); 
@@ -54,14 +53,13 @@ const PlantSharingBoardWrite = () => {
     if (!kakao) return;
 
     const ps = new kakao.maps.services.Places();
+    const geocoder = new kakao.maps.services.Geocoder();
     const radius = 10; // 10km
 
-    if (searchAddress && region) {
-      const address = `${region} ${searchAddress}`;
-      ps.keywordSearch(address, (data, status) => {
+    if (searchAddress) {
+      geocoder.addressSearch(searchAddress, (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
-          const newSearch = data[0];
-          const latlng = new kakao.maps.LatLng(newSearch.y, newSearch.x);
+          const latlng = new kakao.maps.LatLng(result[0].y, result[0].x);
 
           mapRef.current.setCenter(latlng);
           mapRef.current.setLevel(3);
@@ -74,56 +72,16 @@ const PlantSharingBoardWrite = () => {
           markerRef.current = newMarker; 
 
           const infowindow = new kakao.maps.InfoWindow({
-            content: `<div style="padding:5px;">${newSearch.place_name}</div>`,
+            content: `<div style="padding:5px;">${result[0].address_name}</div>`,
           });
           infowindow.open(mapRef.current, newMarker);
           infowindowRef.current = infowindow; 
         } else {
-          console.error('Map search failed with status:', status);
-        }
-      });
-    } else if (searchAddress && currentLatLng) {
-      ps.keywordSearch(searchAddress, (data, status) => {
-        if (status === kakao.maps.services.Status.OK) {
-          const filteredData = data.filter(place => {
-            const placeLatLng = new kakao.maps.LatLng(place.y, place.x);
-            const distance = calculateDistance(
-              currentLatLng.getLat(),
-              currentLatLng.getLng(),
-              placeLatLng.getLat(),
-              placeLatLng.getLng()
-            );
-            return distance <= radius; 
-          });
-
-          if (filteredData.length > 0) {
-            const newSearch = filteredData[0];
-            const latlng = new kakao.maps.LatLng(newSearch.y, newSearch.x);
-
-            mapRef.current.setCenter(latlng);
-            mapRef.current.setLevel(3);
-
-            if (markerRef.current) markerRef.current.setMap(null);
-            if (infowindowRef.current) infowindowRef.current.close();
-
-            const newMarker = new kakao.maps.Marker({ position: latlng });
-            newMarker.setMap(mapRef.current);
-            markerRef.current = newMarker; 
-
-            const infowindow = new kakao.maps.InfoWindow({
-              content: `<div style="padding:5px;">${newSearch.place_name}</div>`,
-            });
-            infowindow.open(mapRef.current, newMarker);
-            infowindowRef.current = infowindow; 
-          } else {
-            console.warn('No places found within 5km radius.');
-          }
-        } else {
-          console.error('Map search failed with status:', status);
+          console.error('주소 검색 실패, 상태:', status);
         }
       });
     }
-  }, [searchAddress, region, currentLatLng]);
+  }, [searchAddress]);
 
   const handleMapClick = useCallback((mouseEvent) => {
     const { kakao } = window;
@@ -139,17 +97,17 @@ const PlantSharingBoardWrite = () => {
     markerRef.current = newMarker; 
 
     const geocoder = new kakao.maps.services.Geocoder();
-    geocoder.coord2RegionCode(latlng.getLng(), latlng.getLat(), (result, status) => {
+    geocoder.coord2Address(latlng.getLng(), latlng.getLat(), (result, status) => {
       if (status === kakao.maps.services.Status.OK) {
-        const address = result[0].address_name;
+        const address = result[0].address.address_name;
 
         const infowindow = new kakao.maps.InfoWindow({
-          content: `<div style="padding:5px;">${address}</div>`,
+          content: `<div style="padding:5px;">주소: ${address}</div>`,
         });
         infowindow.open(mapRef.current, newMarker);
         infowindowRef.current = infowindow; 
       } else {
-        console.error('Geocoding failed with status:', status);
+        console.error('주소 검색 실패, 상태:', status);
       }
     });
   }, []);
@@ -157,7 +115,7 @@ const PlantSharingBoardWrite = () => {
   useEffect(() => {
     const { kakao } = window;
     if (!kakao) {
-      console.error('Kakao Maps API not loaded.');
+      console.error('Kakao Maps API가 로드되지 않았습니다.');
       return;
     }
 
@@ -177,10 +135,18 @@ const PlantSharingBoardWrite = () => {
         mapRef.current.setCenter(latlng);
         mapRef.current.setLevel(5); 
 
-       
         if (currentLocationMarkerRef.current) currentLocationMarkerRef.current.setMap(null);
 
-        const newMarker = new kakao.maps.Marker({ position: latlng, title: '현재 위치' });
+        const imageSrc = '/path/to/current-location-marker.png'; // 커스텀 마커 이미지 경로
+        const imageSize = new kakao.maps.Size(32, 32); // 마커 이미지 크기
+        const imageOption = { offset: new kakao.maps.Point(16, 32) }; // 마커 이미지 위치 조정
+        const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
+        const newMarker = new kakao.maps.Marker({
+          position: latlng,
+          image: markerImage, // 커스텀 마커 이미지 설정
+          title: '현재 위치'
+        });
         newMarker.setMap(mapRef.current);
         currentLocationMarkerRef.current = newMarker; 
 
@@ -192,7 +158,7 @@ const PlantSharingBoardWrite = () => {
         infowindowRef.current = infowindow; 
       },
       (error) => {
-        console.error('Error getting current position:', error);
+        console.error('현재 위치를 가져오는 중 오류 발생:', error);
         mapRef.current.setCenter(new kakao.maps.LatLng(35.1587, 129.1601));
       }
     );
@@ -209,14 +175,13 @@ const PlantSharingBoardWrite = () => {
 
   const handleSearchReset = () => {
     setSearchAddress('');
-    setRegion('');
 
     if (markerRef.current) markerRef.current.setMap(null);
     if (infowindowRef.current) infowindowRef.current.close();
 
     if (currentLatLng) {
       mapRef.current.setCenter(currentLatLng);
-      mapRef.current.setLevel(5); 
+      mapRef.current.setLevel(3); 
     }
   };
 
@@ -263,19 +228,11 @@ const PlantSharingBoardWrite = () => {
         <div className="search-container">
           <input
             type="text"
-            value={region}
-            onChange={(e) => setRegion(e.target.value)}
-            className="search-input"
-            placeholder="지역"
-            style={{ width: '150px' }}
-          />
-          <input
-            type="text"
             value={searchAddress}
             onChange={(e) => setSearchAddress(e.target.value)}
             className="search-input"
-            placeholder="주소 또는 키워드 검색"
-            style={{ width: '300px' }}
+            placeholder="주소를 입력하세요."
+            style={{ width: '450px' }}
           />
           <button type="button" onClick={searchMap} className="search-button"><FiSearch /></button>
           <button type="button" onClick={handleSearchReset} className="reset-button"><GrPowerReset /></button>
