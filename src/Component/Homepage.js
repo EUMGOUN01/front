@@ -21,7 +21,7 @@ const Homepage = () => {
             className="homepage-button yellow"
             onClick={() => handleNavigation('/info')}
           >
-            식물사전
+            식물지식
             <FaChevronRight className="icon" />
           </div>
           <div

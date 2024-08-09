@@ -15,7 +15,7 @@ const Header = () => {
       <h1 onClick={() => navigate('/')}>Greenery</h1>
       <hr className="divider" />
       <nav>
-        <NavItem href="/info">식물사전</NavItem>
+        <NavItem href="/info">식물백과</NavItem>
         <NavItem href="/plant-sharing">식물나눔</NavItem>
         <NavItem href="/board">커뮤니티</NavItem>
         <NavItem href="/community-garden">공용텃밭</NavItem>

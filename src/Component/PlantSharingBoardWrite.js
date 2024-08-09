@@ -38,23 +38,11 @@ const PlantSharingBoardWrite = () => {
     navigate('/plant-sharing');
   };
 
-  const calculateDistance = (lat1, lng1, lat2, lng2) => {
-    const toRad = (value) => (value * Math.PI) / 180;
-    const R = 6371; 
-    const dLat = toRad(lat2 - lat1);
-    const dLng = toRad(lng2 - lng1);
-    const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c; 
-  };
-
   const searchMap = useCallback(() => {
     const { kakao } = window;
     if (!kakao) return;
 
-    const ps = new kakao.maps.services.Places();
     const geocoder = new kakao.maps.services.Geocoder();
-    const radius = 10; // 10km
 
     if (searchAddress) {
       geocoder.addressSearch(searchAddress, (result, status) => {
@@ -137,14 +125,14 @@ const PlantSharingBoardWrite = () => {
 
         if (currentLocationMarkerRef.current) currentLocationMarkerRef.current.setMap(null);
 
-        const imageSrc = '/path/to/current-location-marker.png'; // 커스텀 마커 이미지 경로
-        const imageSize = new kakao.maps.Size(32, 32); // 마커 이미지 크기
-        const imageOption = { offset: new kakao.maps.Point(16, 32) }; // 마커 이미지 위치 조정
+        const imageSrc = '/path/to/current-location-marker.png'; 
+        const imageSize = new kakao.maps.Size(32, 32);
+        const imageOption = { offset: new kakao.maps.Point(16, 32) };
         const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
         const newMarker = new kakao.maps.Marker({
           position: latlng,
-          image: markerImage, // 커스텀 마커 이미지 설정
+          image: markerImage,
           title: '현재 위치'
         });
         newMarker.setMap(mapRef.current);

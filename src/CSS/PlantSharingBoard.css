@@ -17,12 +17,13 @@
   gap: 20px; /* 제목과 검색창 사이의 간격 */
   font-size: 36px;
   font-family: 'Noto Sans KR', sans-serif; /* 폰트 패밀리 적용 */
+  color: #0F3830; /* 타이틀 색상 */
 }
 
 .plant-sharing-board-search-container {
   display: flex;
   align-items: center; /* 수직 중앙 정렬 */
-  gap: 5px; /* 검색창과 버튼 사이의 간격 */
+  gap: 10px; /* 검색창과 버튼 사이의 간격 */
   margin-top: 20px; /* 검색창과 버튼을 게시판 글과 더 가까이 배치 */
   margin-left: auto; /* 오른쪽으로 밀어 붙이기 */
   font-family: 'Noto Sans KR', sans-serif; /* 폰트 패밀리 적용 */
@@ -57,7 +58,7 @@
 .plant-sharing-board-button-container {
   display: flex;
   align-items: center;
-  gap: 10px; /* 버튼 사이의 간격 조정 */
+  gap: 8px; /* 버튼 사이의 간격 조정 */
   font-family: 'Noto Sans KR', sans-serif; /* 폰트 패밀리 적용 */
 }
 
