@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../CSS/WritePostPage.css'; // CSS 파일 경로
 
 const WritePostPage = () => {
@@ -13,23 +14,31 @@ const WritePostPage = () => {
     setFile(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 데이터를 콘솔에 출력하거나 상태로 저장할 수 있습니다.
-    console.log('제목:', title);
-    console.log('카테고리:', category);
-    console.log('내용:', content);
-    console.log('파일:', file);
+    // FormData 객체를 생성하여 데이터를 추가합니다.
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('category', category);
+    formData.append('content', content);
+    if (file) {
+      formData.append('file', file);
+    }
 
-    // 폼 데이터를 처리한 후 페이지를 리셋
-    setTitle('');
-    setCategory('공지');
-    setContent('');
-    setFile(null);
+    try {
+      // POST 요청을 통해 데이터를 서버에 전송합니다.
+      await axios.post('/api/freeboard', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-    // 페이지 이동 (필요시)
-    navigate('/board');
+      // 성공적으로 전송된 후 게시판 목록 페이지로 이동합니다.
+      navigate('/board');
+    } catch (error) {
+      console.error('게시물을 작성하는 데 실패했습니다.', error);
+    }
   };
 
   return (
@@ -51,6 +60,7 @@ const WritePostPage = () => {
           </label>
         </div>
         <label className="label">
+          제목:
           <input
             type="text"
             value={title}
@@ -61,6 +71,7 @@ const WritePostPage = () => {
           />
         </label>
         <label className="label">
+          내용:
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}

@@ -1,22 +1,34 @@
-// src/Component/BoardPage.js
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { CiSearch } from 'react-icons/ci';
 import '../CSS/BoardPage.css';
 import Footer from './Footer';
 
-const mockData = [
-  { freeBoardId: 1, privateField: '공개', type: '공지', title: '첫번째 게시물', content: '내용1', img: '', username: 'admin', view: 10, createDate: '2024-08-01T00:00:00Z' },
-  { freeBoardId: 2, privateField: '공개', type: '질문', title: '두번째 게시물', content: '내용2', img: '', username: 'user1', view: 20, createDate: '2024-08-02T00:00:00Z' },
-  // ... 추가 데이터
-];
-
 const BoardPage = () => {
   const navigate = useNavigate();
-  const [boardData] = useState(mockData);
+  const [boardData, setBoardData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const postsPerPage = 15;
+
+  useEffect(() => {
+    const fetchBoardData = async () => {
+      try {
+        const response = await axios.get('/public/freeboard', {
+          params: {
+            page: currentPage,
+            size: postsPerPage
+          }
+        });
+        setBoardData(response.data.content); 
+      } catch (error) {
+        console.error('게시물을 불러오는 데 실패했습니다.', error);
+      }
+    };
+
+    fetchBoardData();
+  }, [currentPage]); 
 
   const filteredPosts = useMemo(() => boardData.filter(post =>
     post.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -38,8 +50,8 @@ const BoardPage = () => {
     setCurrentPage(0);
   };
 
-  React.useEffect(() => {
-    document.title = "자유 게시판"; 
+  useEffect(() => {
+    document.title = "자유 게시판";
   }, []);
 
   return (
@@ -79,15 +91,15 @@ const BoardPage = () => {
             {currentPosts.length > 0 ? (
               currentPosts.map((post, index) => (
                 <tr
-                  key={post.freeBoardId}
-                  onClick={() => navigate(`/post/${post.freeBoardId}`)}
+                  key={post.free_board_id}
+                  onClick={() => navigate(`/post/${post.free_board_id}`)}
                   className="board-row"
                 >
                   <td>{indexOfFirstPost + index + 1}</td>
                   <td>{post.type}</td>
                   <td>{post.title}</td>
                   <td>{post.username}</td>
-                  <td>{new Date(post.createDate).toLocaleDateString()}</td>
+                  <td>{new Date(post.create_date).toLocaleDateString()}</td>
                   <td>{post.view}</td>
                 </tr>
               ))

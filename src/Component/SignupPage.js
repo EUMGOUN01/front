@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Footer from './Footer';
 import '../CSS/SignupPage.css';
 
@@ -10,9 +11,29 @@ const SignupPage = () => {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    navigate('/login');
+
+    try {
+      const response = await axios.post('/public/signin', {
+        username,
+        passwoard: password,  // DB 필드명에 맞게 수정
+        alias: nickname,
+        email,
+        role: 'user', // 기본 역할 설정, 필요에 따라 변경
+        enabled: 1,   // 기본 활성화 상태 설정
+      });
+
+      if (response.status === 201) {
+        navigate('/login');
+      } else {
+        // 서버에서 반환된 오류 메시지를 처리합니다.
+        alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+      }
+    } catch (error) {
+      console.error('There was an error signing up!', error);
+      alert('회원가입 중 오류가 발생했습니다. 다시 시도해주세요.');
+    }
   };
 
   return (

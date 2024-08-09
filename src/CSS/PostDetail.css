@@ -115,3 +115,22 @@
   background-color: #00332a;
   transform: scale(1.05);
 }
+
+.post-detail-image-upload {
+  margin-top: 20px; /* 이미지 업로드와 댓글 목록 사이 여백 조정 */
+  text-align: center;
+}
+
+.post-detail-image-input {
+  display: block;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+.post-detail-image-preview {
+  margin-top: 15px;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}

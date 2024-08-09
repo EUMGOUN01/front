@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../CSS/LoginPage.css';
 
 const LoginPage = () => {
@@ -7,9 +8,25 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    navigate('/');
+
+    try {
+      const response = await axios.post('/public/login', {
+        username,
+        passwoard: password, // DB 필드명에 맞게 수정
+      });
+
+      if (response.status === 200) {
+        navigate('/');
+      } else {
+        // 서버에서 반환된 오류 메시지를 처리합니다.
+        alert('로그인에 실패했습니다. 다시 시도해주세요.');
+      }
+    } catch (error) {
+      console.error('There was an error logging in!', error);
+      alert('로그인 중 오류가 발생했습니다. 다시 시도해주세요.');
+    }
   };
 
   return (
@@ -46,7 +63,6 @@ const LoginPage = () => {
          
         </div>
       </div>
-     
     </div>
   );
 };
