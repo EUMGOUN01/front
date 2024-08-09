@@ -53,7 +53,6 @@ const InfoPage = () => {
             {plantLoading ? <p>로딩 중...</p> : plantError ? <p>에러 발생: {plantError}</p> : (
               plantData && plantData.response && plantData.response.body && plantData.response.body.item && (
                 <div>
-                  <h1>식물 상세 정보</h1>
                   <p><strong> {plantData.response.body.item.distbNm}</strong></p>
                   <p><strong>콘텐츠 번호:</strong> {plantData.response.body.item.cntntsNo}</p>
                   <p><strong>라틴어 이름:</strong> {plantData.response.body.item.plntbneNm}</p>
